@@ -1,5 +1,6 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,25 +12,28 @@
     <script type="text/javascript" src="/QRcode/js/jquery-qrcode.min.js"></script>
     <script type="text/javascript" src="/QRcode/js/lodash.js"></script>
 
-    <!--<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./css/fontawesome-all.css">
     <script type="text/javascript" src="./js/bootstrap.min.js"></script>
     <script type="text/javascript" src="./js/jquery.min.js"></script>
     <script type="text/javascript" src="./js/jquery-qrcode.min.js"></script>
-    <script type="text/javascript" src="./js/lodash.js"></script>-->
+    <script type="text/javascript" src="./js/lodash.js"></script> -->
 
 </head>
+
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
         <div class="container-fluid">
-            <a href="https://stillf.github.io/" class="navbar-brand" style="color:#ffffff;margin-left:10px;font-size:18px;" target="_blank">stillF&ensp;信柴柴，得第一</a>
+            <a href="https://stillf.github.io/" class="navbar-brand"
+                style="color:#ffffff;margin-left:10px;font-size:18px;" target="_blank">stillF&ensp;信柴柴，得第一</a>
         </div>
     </nav>
     <main class="container" style="margin-bottom:50px;" id="stock">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div style="color:#333;font-size:22px;font-weight:bold;">
                 QRcode產生器
-                <a href="https://github.com/stillF/QRcode" style="margin-left:5px;" target="_blank"><i class="fas fa-link"></i></a>
+                <a href="https://github.com/stillF/QRcode" style="margin-left:5px;" target="_blank"><i
+                        class="fas fa-link"></i></a>
             </div>
             <hr>
         </div>
@@ -43,18 +47,30 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-12">
                                 <div class="mb-3">
+                                    <label class="form-label">標題</label>
+                                    <button type="button" class="btn btn-danger btn-sm"
+                                        style="margin-left:7px;padding: 1px 5px;font-size: 12px;"
+                                        onclick="cleanTitleTxt()">清除</button>
+                                    <input type="text" class="form-control" id="titleTxt">
+                                </div>
+                                <div class="mb-3">
                                     <label class="form-label">文字內容</label>
-                                    <button type="button" class="btn btn-danger btn-sm" style="margin-left:7px;padding: 1px 5px;font-size: 12px;" onclick="cleanQRcodeTxt()">清除</button>
+                                    <button type="button" class="btn btn-danger btn-sm"
+                                        style="margin-left:7px;padding: 1px 5px;font-size: 12px;"
+                                        onclick="cleanQRcodeTxt()">清除</button>
                                     <textarea class="form-control" rows="3" id="QRcodeTxt"></textarea>
                                 </div>
                                 <div class="d-grid gap-2">
-                                    <button class="btn btn-primary btn-sm" type="button" onclick="makeQrcode();">送出</button>
+                                    <button class="btn btn-primary btn-sm" type="button"
+                                        onclick="makeQrcode();">送出</button>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12 text-center">
                                 <div style="margin-top:30px;"></div>
                                 <div id="qrcode"></div>
-                                <button id="showBtn" type="button" class="btn btn-primary btn-sm" style="padding:1px 5px;font-size:12px;display:none;" onclick="viewQrcode()"><i class="fas fa-search"></i></button>
+                                <button id="showBtn" type="button" class="btn btn-primary btn-sm"
+                                    style="padding:1px 5px;font-size:12px;display:none;" onclick="viewQrcode()"><i
+                                        class="fas fa-search"></i></button>
                             </div>
                         </div>
                     </div>
@@ -70,8 +86,9 @@
                     </div>
                     <div class="modal-body">
                         <div class="text-center">
-                            <div style="margin-top:100px;"></div>
+                            <div style="margin-top:30px;"></div>
                             <div id="qrcode2"></div>
+                            <h2 id="titleH2"></h2>
                         </div>
                     </div>
                 </div>
@@ -108,9 +125,17 @@
             $("#showBtn").hide();
         }
 
+        function cleanTitleTxt() {
+            $("#titleTxt").val("");
+            $("#qrcode").empty();
+            $("#showBtn").hide();
+        }
+
         function viewQrcode() {
             let QRcodeTxt = jQuery.trim($("#QRcodeTxt").val());
+            let titleTxt = jQuery.trim($("#titleTxt").val());
             if (QRcodeTxt !== "") {
+                $("#titleH2").text(titleTxt);
                 $("#qrcode2").empty().qrcode(
                     {
                         ecLevel: 'H',
@@ -125,4 +150,5 @@
         }
     </script>
 </body>
+
 </html>
